@@ -3,54 +3,56 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "./api";
 
 const SingleArticle = () => {
-  const { article_id } = useParams();
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const { article_id } = useParams();
+	const [article, setArticle] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
-  useEffect(() => {
-    setLoading(true);
-    getArticleById(article_id)      
-    .then((response) => {
-        setArticle(response.data.article);
-        console.log(response.data)
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(`Error fetching article ${article_id}:`, error);
-        setLoading(false);
-        setError("Error fetching the article. Please try again later.");
-      });
-  }, [article_id]);
+	useEffect(() => {
+		setLoading(true);
+		getArticleById(article_id)
+			.then((response) => {
+				setArticle(response.data.article);
+				console.log(response.data);
+				setLoading(false);
+			})
+			.catch((error) => {
+				console.error(`Error fetching article ${article_id}:`, error);
+				setLoading(false);
+				setError("Error fetching the article. Please try again later.");
+			});
+	}, [article_id]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+	if (loading) {
+		return <p>Loading...</p>;
+	}
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+	if (error) {
+		return <p>{error}</p>;
+	}
 
-  if (!article) {
-    return <p>Article not found</p>;
-  }
+	if (!article) {
+		return <p>Article not found</p>;
+	}
 
-  const formattedDate = new Date(article.created_at).toLocaleDateString();
+	const formattedDate = new Date(article.created_at).toLocaleDateString();
 
-
-  return (
-    <div>
-      <h2>{article.title}</h2>
-      <p>{article.body}</p>
-      <div className = 'single-card-content'>
-        <p>Topic: {article.topic}</p>
-        <p>Author: {article.author}</p>
-        <p>Created At: {formattedDate}</p>
-        <p> Votes: {article.votes}</p>
-        <p>Comment Count: {article.comment_count}</p>
-    </div>
-    </div>
-  );
+	return (
+		<div>
+			{article.article_img_url && (
+				<img src={article.article_img_url} alt={article.title} />
+			)}
+			<h2>{article.title}</h2>
+			<p>{article.body}</p>
+			<div className="single-card-content">
+				<p>Topic: {article.topic}</p>
+				<p>Author: {article.author}</p>
+				<p>Created At: {formattedDate}</p>
+				<p> Votes: {article.votes}</p>
+				<p>Comment Count: {article.comment_count}</p>
+			</div>
+		</div>
+	);
 };
 
 export default SingleArticle;
