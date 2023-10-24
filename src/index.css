@@ -21,6 +21,7 @@ Header h2 {
   margin-top: 0%;
 }
 
+
 Nav {
 	background-color: darkred;
 	display: flex;
@@ -58,14 +59,16 @@ Nav {
   border: 2px solid white;
   max-height: fit-content;
   max-width: 80%;
-  margin: 20px;
+  margin: 150px;
+  padding: 30px ;
   border-radius: 1rem;
   align-items: center;
 }
 
 .card-content{
   flex: 1;
-  padding: 10px;
+  margin: 0px;
+  padding: 0px;
   text-align: center;
 }
 
@@ -85,3 +88,10 @@ Nav {
 
 }
 
+.article-link {
+  color: white;
+}
+
+.single-card-content {
+  text-align: center;
+}
