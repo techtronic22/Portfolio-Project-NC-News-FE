@@ -1,10 +1,10 @@
 const ArticleCard = ({ article }) => {
-  
+  console.log(article);
     const formattedDate = new Date(article.created_at).toLocaleDateString();
   
     return (
       <div className="article-card">
-        {article.image_url && <img src={article.image_url} alt={article.title} />}
+        {article.article_img_url && <img src={article.article_img_url} alt={article.title} />}
         <h2>{article.title}</h2>
         <h3 className="article-desc">{article.body}</h3>
         <div className = 'card-content'>
