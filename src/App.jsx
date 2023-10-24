@@ -4,8 +4,6 @@ import Header from "./Components/Header";
 import Nav from "./Components/Nav";
 import ArticlesList from "./Components/ArticlesList";
 
-import "./App.css";
-
 function App() {
   return (
     <Router>
