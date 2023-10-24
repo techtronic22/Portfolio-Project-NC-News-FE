@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import ArticleCard from "./ArticleCard"; 
-
+import api from "./api"; 
+import ArticleCard from "./ArticleCard";
 
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
 
   useEffect(() => {
-    axios.get("https://nc-news-ts.onrender.com/api/articles")
+    setLoading(true);
+    api.get("/articles")
       .then((response) => {
         setArticles(response.data.articles);
         setLoading(false);
@@ -16,11 +18,17 @@ const ArticlesList = () => {
       .catch((error) => {
         console.error("Error fetching articles:", error);
         setLoading(false);
+        setError("Error fetching articles. Please try again later.");
       });
   }, []);
 
+
   if (loading) {
-    return <p> Loading ...</p>
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   return (
