@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "./api";
+import ArticleComments from "./ArticleComments"
 
 const SingleArticle = () => {
 	const { article_id } = useParams();
@@ -13,7 +14,6 @@ const SingleArticle = () => {
 		getArticleById(article_id)
 			.then((response) => {
 				setArticle(response.data.article);
-				console.log(response.data);
 				setLoading(false);
 			})
 			.catch((error) => {
@@ -51,6 +51,7 @@ const SingleArticle = () => {
 				<p> Votes: {article.votes}</p>
 				<p>Comment Count: {article.comment_count}</p>
 			</div>
+			<ArticleComments article_id={article_id} />
 		</div>
 	);
 };

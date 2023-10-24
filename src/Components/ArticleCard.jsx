@@ -1,5 +1,4 @@
 const ArticleCard = ({ article }) => {
-  console.log(article);
     const formattedDate = new Date(article.created_at).toLocaleDateString();
   
     return (
