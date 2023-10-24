@@ -13,12 +13,13 @@ const ArticleComments = ({ article_id }) => {
 				setComments(response.data.comments);
 				setLoading(false);
 			})
-			.catch((error) => {
+            .catch((error) => {
 				console.error("Error fetching articles:", error);
 				setLoading(false);
 				setError("An error occurred while fetching comments.");
 			});
-	}, [article_id]);
+          }, [article_id]);
+			
 
 	if (loading) {
 		return <p>Loading comments...</p>;
@@ -31,19 +32,20 @@ const ArticleComments = ({ article_id }) => {
     if (comments.length === 0) {
         return <p>No comments available for this article.</p>
     }
-	return (
-		<div>
-			<h2>Comments</h2>
-				<ul>
-					{comments.map((comment) => (
-						<li key={comment.comment_id}>
-							<p>{comment.body}</p>
-							<p>By: {comment.author}</p>
-						</li>
-					))}
-				</ul>
-		</div>
-	);
-};
+	
+return (
+    <section>
+        <h2>Comments</h2>
+        <ul>
+            {comments.map((comment) => (
+                <li key={comment.comment_id}>
+                    <p>{comment.body}</p>
+                    <p>By: {comment.author}</p>
+                </li>
+            ))}
+        </ul>
+    </section>
+);
+}
 
 export default ArticleComments;
