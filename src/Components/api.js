@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const newsApi = axios.create({
+export const api = axios.create({
   baseURL: "https://nc-news-ts.onrender.com/api",
 });
 
-export default newsApi;
+export const getArticleById = (article_id) => {
+  return api.get(`/articles/${article_id}`);
+};
+

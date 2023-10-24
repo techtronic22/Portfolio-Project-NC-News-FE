@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import api from "./api";
+import { getArticleById } from "./api";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -10,9 +10,10 @@ const SingleArticle = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.get(`/articles/${article_id}`)
-      .then((response) => {
+    getArticleById(article_id)      
+    .then((response) => {
         setArticle(response.data.article);
+        console.log(response.data)
         setLoading(false);
       })
       .catch((error) => {
@@ -34,6 +35,9 @@ const SingleArticle = () => {
     return <p>Article not found</p>;
   }
 
+  const formattedDate = new Date(article.created_at).toLocaleDateString();
+
+
   return (
     <div>
       <h2>{article.title}</h2>
@@ -41,7 +45,7 @@ const SingleArticle = () => {
       <div className = 'single-card-content'>
         <p>Topic: {article.topic}</p>
         <p>Author: {article.author}</p>
-        <p>Created At: {article.created_at}</p>
+        <p>Created At: {formattedDate}</p>
         <p> Votes: {article.votes}</p>
         <p>Comment Count: {article.comment_count}</p>
     </div>
