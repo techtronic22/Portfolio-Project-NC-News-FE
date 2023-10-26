@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "./api";
 import ArticleComments from "./ArticleComments"
+import ArticleVote from "./ArticleVotes"
 
 const SingleArticle = () => {
 	const { article_id } = useParams();
 	const [article, setArticle] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+
 
 	useEffect(() => {
 		setLoading(true);
@@ -48,7 +50,7 @@ const SingleArticle = () => {
 				<p>Topic: {article.topic}</p>
 				<p>Author: {article.author}</p>
 				<p>Created At: {formattedDate}</p>
-				<p> Votes: {article.votes}</p>
+				<ArticleVote article_id={article_id} initialVotes={article.votes} />
 				<p>Comment Count: {article.comment_count}</p>
 			</div>
 			<ArticleComments article_id={article_id} />
