@@ -10,6 +10,7 @@ const SingleArticle = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
+
 	useEffect(() => {
 		setLoading(true);
 		getArticleById(article_id)
@@ -49,8 +50,7 @@ const SingleArticle = () => {
 				<p>Topic: {article.topic}</p>
 				<p>Author: {article.author}</p>
 				<p>Created At: {formattedDate}</p>
-				<p> Votes: {article.votes}</p>
-				<ArticleVote article_id={article_id} />
+				<ArticleVote article_id={article_id} initialVotes={article.votes} />
 				<p>Comment Count: {article.comment_count}</p>
 			</div>
 			<ArticleComments article_id={article_id} />
