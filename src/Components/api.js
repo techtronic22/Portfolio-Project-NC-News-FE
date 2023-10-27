@@ -30,3 +30,7 @@ export const postComment = (article_id, optimisticComment) => {
     });
 
 };
+
+export const getArticlesByTopic = (slug) => {
+  return api.get(`/articles?topic=${slug}`);
+};
