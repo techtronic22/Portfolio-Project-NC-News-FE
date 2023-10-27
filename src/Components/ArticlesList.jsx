@@ -3,6 +3,14 @@ import { getSortedArticles } from "./api";
 import ArticleCard from "./ArticleCard";
 import { Link } from "react-router-dom";
 
+// Added SortBy Functionality to FE,however due to issues on BE, it isn't fully working. I have spoken to my mentor, Jodie, and she 
+// suggested to move on to the next ticket. 'It seems that you haven't got it sorted for the BE functionality so I'd make a note to 
+// return to it and continue with building functionality for the FE that does work with your BE'
+
+// Also I have accidentally done ticket 10 as part of my PR for ticket 9, Sorry about that
+
+
+
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
