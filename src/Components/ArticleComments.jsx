@@ -45,7 +45,7 @@ const ArticleComments = ({ article_id, username }) => {
         {comments.length === 0 ? (
             <p>No comments available for this article.</p>
         ) : (
-            <ul>
+            <ul> 
                 {comments.map((comment) => (
                     <li key={comment.comment_id}>
                         <p>{comment.body}</p>

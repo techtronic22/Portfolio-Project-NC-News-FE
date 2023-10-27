@@ -6,34 +6,43 @@ const CommentForm = ({ article_id, username, comments, setComments }) => {
   const [isFormValid, setIsFormValid] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+
+
+    if (e.target.value.trim() !== "") {
+      setIsFormValid(true);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setIsSubmitting(true); 
+
     if (newComment.trim() === "") {
       setIsFormValid(false);
+      setIsSubmitting(false); 
       return;
     }
 
-    setIsFormValid(true);
-    setIsSubmitting(true);
-
     const optimisticComment = {
-    author: username,
+      author: username,
       body: newComment,
     };
 
     setComments([optimisticComment, ...comments]);
-    postComment(article_id, optimisticComment)
-  .then((postedComment) => {
-    setComments(prevComments => [postedComment, ...prevComments]);
-    setIsSubmitting(false);
-  })
-  .catch((error) => {
-    console.error("Error posting comment:", error);
-    setComments(prevComments => prevComments.filter((c) => c !== optimisticComment));
-    setIsSubmitting(false);
-  });
 
+    postComment(article_id, optimisticComment)
+      .then((postedComment) => {
+        setComments(prevComments => [postedComment, ...prevComments]);
+        setIsSubmitting(false);
+      })
+      .catch((error) => {
+        console.error("Error posting comment:", error);
+        setComments(prevComments => prevComments.filter((c) => c !== optimisticComment));
+        setIsSubmitting(false);
+      });
 
     setNewComment("");
   };
@@ -42,7 +51,7 @@ const CommentForm = ({ article_id, username, comments, setComments }) => {
     <div>
       <textarea
         value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
+        onChange={handleCommentChange}
         placeholder="Add a comment..."
       />
       {!isFormValid && (
