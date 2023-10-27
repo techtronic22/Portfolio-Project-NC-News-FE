@@ -30,3 +30,11 @@ export const postComment = (article_id, optimisticComment) => {
     });
 
 };
+
+export const getArticlesByTopic = (slug) => {
+  return api.get(`/articles?topic=${slug}`);
+};
+
+export const getSortedArticles = (sort_by = "created_at", order = "desc") => {
+  return api.get(`/articles?sort_by=${sort_by}&order=${order}`);
+};

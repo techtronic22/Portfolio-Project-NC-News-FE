@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { api } from "./api";
+import { getSortedArticles } from "./api";  
 import ArticleCard from "./ArticleCard";
 import { Link } from "react-router-dom";
-
 
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [sort_by, setSortBy] = useState("created_at");  
+  const [order, setOrder] = useState("desc");  
 
   useEffect(() => {
     setLoading(true);
-    api.get("/articles")
+    getSortedArticles(sort_by, order)
       .then((response) => {
         setArticles(response.data.articles);
         setLoading(false);
@@ -22,8 +22,15 @@ const ArticlesList = () => {
         setLoading(false);
         setError("Error fetching articles. Please try again later.");
       });
-  }, []);
+  }, [sort_by, order]);
 
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
+  const handleOrderChange = (e) => {
+    setOrder(e.target.value);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -35,11 +42,23 @@ const ArticlesList = () => {
 
   return (
     <div className="articles-list-container">
+      <div className="sorting-controls">
+        <select onChange={handleSortChange}>
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comment Count</option>
+          <option value="votes">Votes</option>
+        </select>
+        <select onChange={handleOrderChange}>
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+      </div>
+
       <div className="article-cards-container">
         {articles.map((article) => (
-             <Link className = 'article-link' key={article.article_id} to={`/articles/${article.article_id}`}>
-             <ArticleCard article={article} />
-           </Link>
+          <Link className="article-link" key={article.article_id} to={`/articles/${article.article_id}`}>
+            <ArticleCard article={article} />
+          </Link>
         ))}
       </div>
     </div>
