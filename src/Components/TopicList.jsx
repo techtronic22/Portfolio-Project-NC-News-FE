@@ -3,12 +3,10 @@ import { api } from "./api";
 import TopicCard from "./TopicCard";
 import { Link } from "react-router-dom";
 
-
 const TopicList = () => {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     setLoading(true);
@@ -18,12 +16,10 @@ const TopicList = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching topics:", error);
         setLoading(false);
         setError("Error fetching topics. Please try again later.");
       });
   }, []);
-
 
   if (loading) {
     return <p>Loading...</p>;
@@ -34,15 +30,15 @@ const TopicList = () => {
   }
 
   return (
-    <div className="topics-list-container">
-      <div className="topics-cards-container">
+    <section className="topics-list-container">
+      <main className="topics-cards-container">
         {topics.map((topic) => (
-             <Link className = 'topics-link' key={topic.slug} to={`/topics/${topic.slug}`}>
-             <TopicCard topic={topic} />
-           </Link>
+          <Link className='topics-link' key={topic.slug} to={`/topics/${topic.slug}`}>
+            <TopicCard topic={topic} />
+          </Link>
         ))}
-      </div>
-    </div>
+      </main>
+    </section>
   );
 };
 

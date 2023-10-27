@@ -17,7 +17,6 @@ const SingleTopic = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error(`Error fetching articles for topic ${slug}:`, error); 
         setLoading(false);
         setError("Error fetching articles for this topic. Please try again later.");
       });
@@ -36,15 +35,15 @@ const SingleTopic = () => {
   }
 
   return (
-    <div className="articles-list-container">
-      <div className="article-cards-container">
+    <section className="articles-list-container">
+      <main className="article-cards-container">
         {articles.map((article) => (
           <Link className='article-link' key={article.article_id} to={`/articles/${article.article_id}`}>
             <ArticleCard article={article} />
           </Link>
         ))}
-      </div>
-    </div>
+      </main>
+    </section>
   );
 };
 
