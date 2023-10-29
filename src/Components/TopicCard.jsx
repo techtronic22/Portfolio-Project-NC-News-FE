@@ -2,7 +2,7 @@ const TopicCard = ({ topic }) => {
   
     return (
       <div className="topic-card">
-        <h2>{topic.slug}</h2>
+        <h1>{topic.slug}</h1>
         <div className = 'topic-content'>
         <p>{topic.description}</p>
         </div>

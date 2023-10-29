@@ -15,7 +15,6 @@ const ArticleVotes = ({ article_id, initialVotes }) => {
               setLocalVotes(response.data.votes);
           })
           .catch((error) => {
-              console.error("Error updating vote:", error);
               setVoted(0); 
           });
   }, [voted, article_id]);

@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 // Also I have accidentally done ticket 10 as part of my PR for ticket 9, Sorry about that
 
 
-
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +25,6 @@ const ArticlesList = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching articles:", error);
         setLoading(false);
         setError("Error fetching articles. Please try again later.");
       });

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "./api";
-import ArticleComments from "./ArticleComments"
-import ArticleVote from "./ArticleVotes"
+import ArticleComments from "./ArticleComments";
+import ArticleVote from "./ArticleVotes";
 import CommentForm from "./CommentForm";
 
 const SingleArticle = () => {
@@ -19,7 +19,6 @@ const SingleArticle = () => {
 				setLoading(false);
 			})
 			.catch((error) => {
-				console.error(`Error fetching article ${article_id}:`, error);
 				setLoading(false);
 				setError("Error fetching the article. Please try again later.");
 			});
@@ -40,9 +39,13 @@ const SingleArticle = () => {
 	const formattedDate = new Date(article.created_at).toLocaleDateString();
 
 	return (
-		<div>
+		<div className="single-article-container">
 			{article.article_img_url && (
-				<img src={article.article_img_url} alt={article.title} />
+				<img
+					className="article-image"
+					src={article.article_img_url}
+					alt={article.title}
+				/>
 			)}
 			<h2>{article.title}</h2>
 			<p>{article.body}</p>
