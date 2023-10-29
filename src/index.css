@@ -1,9 +1,10 @@
 :root {
 	background: black;
-	color: white;
+	color: rgb(255, 255, 255);
   font-family: 'Roboto Flex', sans-serif;
 }
 
+/* Header Element */
 Header h1 {
 	text-align: center;
   font-family: 'Russo One', sans-serif;
@@ -19,9 +20,10 @@ Header h2 {
   font-family: 'Roboto Flex', sans-serif;
   font-size: 1rem;
   margin-top: 0%;
+  color: white;
 }
 
-
+/* Navigation Bar & Links */
 Nav {
 	background-color: darkred;
 	display: flex;
@@ -53,6 +55,8 @@ Nav {
 	background-color: #660000;
 }
 
+
+/* Article List  */
 .article-card {
   display: flex;
   flex-direction: column;
@@ -63,7 +67,9 @@ Nav {
   padding: 30px ;
   border-radius: 1rem;
   align-items: center;
+  justify-content: center;
 }
+
 
 .card-content{
   flex: 1;
@@ -92,7 +98,198 @@ Nav {
   color: white;
 }
 
+
 .single-card-content {
   text-align: center;
 }
 
+.topics-link {
+  color: white;
+  text-align: center;
+}
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid white;
+  max-height: fit-content;
+  max-width: 80%;
+  margin: 150px;
+  padding: 30px ;
+  border-radius: 1rem;
+  align-items: center;
+
+}
+
+.topic-card:hover{
+
+  background-color: rgb(148, 0, 0);
+  overflow:hidden;
+
+}
+
+.single-card-content {
+  border: 1px solid white;
+  border-radius: 25px;
+  margin: 30px;
+  padding:0px;
+
+}
+
+/* Article Comments List & Delete Button*/
+.comments-container h2 {
+  margin-left: 20px;
+  color: white;
+}
+
+.comments-container {
+  background: rgb(95, 95, 95);
+  border: 1px solid black;
+  border-radius: 25px;
+  margin: 30px;
+}
+
+.comment-list {
+  list-style-type: none;
+  padding-left: 0; 
+  color: white;
+}
+
+.comment-list li {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+  transition: background 0.3s;
+}
+
+.comment-list li:hover {
+  background: rgba(255, 255, 255, 0.1); 
+}
+
+.comment-list p {
+  margin: 5px 0; 
+  text-align: left;
+}
+
+.comment-list button {
+  background: darkred;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.comment-list button:hover {
+  background: #660000;
+}
+
+/* New Comment Form */
+.comment-form {
+  width: 100%; 
+  margin: auto; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+
+.single-article-container {
+  max-width: 70%; 
+  margin-top: 20px;
+  margin-left: 220px;
+  padding: 30px;
+  border: 1px solid #ddd; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  background-color: #fff; 
+  align-items: center;
+  text-align: center;
+  color: grey;
+}
+
+.article-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; 
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.comment-form {
+  max-width: 600px; 
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+
+
+.submit-button {
+  background-color: darkred;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.submit-button:hover {
+  background-color: #660000;
+}
+
+.submit-button:disabled {
+  background-color: #777;
+  cursor: not-allowed;
+}
+
+
+.sorting-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #f7f7f7;
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sorting-controls label {
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #555;
+}
+
+.sorting-controls select {
+  margin: 0 20px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  appearance: none; 
+}
+
+.sorting-controls select:focus {
+  border-color: darkred;
+  outline: none;
+}

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { postComment, getCommentsByArticleId } from "./api";
+import { postComment } from "./api";
 
-const CommentForm = ({ article_id, username, comments, setComments }) => {
+const CommentForm = ({ article_id, username, setComments }) => {
   const [newComment, setNewComment] = useState("");
   const [isFormValid, setIsFormValid] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
-
-
     if (e.target.value.trim() !== "") {
       setIsFormValid(true);
     }
@@ -17,30 +15,37 @@ const CommentForm = ({ article_id, username, comments, setComments }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setIsSubmitting(true); 
+    setIsSubmitting(true);
 
     if (newComment.trim() === "") {
       setIsFormValid(false);
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
       return;
     }
 
     const optimisticComment = {
       author: username,
       body: newComment,
+      comment_id: Date.now(),
     };
 
-    setComments([optimisticComment, ...comments]);
+    setComments((prevComments) => [optimisticComment, ...prevComments]);
 
     postComment(article_id, optimisticComment)
       .then((postedComment) => {
-        setComments(prevComments => [postedComment, ...prevComments]);
+        setComments((prevComments) =>
+          prevComments.map((c) =>
+            c.comment_id === optimisticComment.comment_id ? postedComment : c
+          )
+        );
         setIsSubmitting(false);
       })
       .catch((error) => {
-        console.error("Error posting comment:", error);
-        setComments(prevComments => prevComments.filter((c) => c !== optimisticComment));
+        setComments((prevComments) =>
+          prevComments.filter(
+            (c) => c.comment_id !== optimisticComment.comment_id
+          )
+        );
         setIsSubmitting(false);
       });
 
@@ -48,16 +53,21 @@ const CommentForm = ({ article_id, username, comments, setComments }) => {
   };
 
   return (
-    <div>
+    <div className="comment-form">
       <textarea
+        className="comment-textarea"
         value={newComment}
         onChange={handleCommentChange}
         placeholder="Add a comment..."
       />
       {!isFormValid && (
-        <p style={{ color: "red" }}>Please fill out the comment field.</p>
+        <p className="error-message">Please fill out the comment field.</p>
       )}
-      <button onClick={handleSubmit} disabled={!isFormValid || isSubmitting}>
+      <button
+        className="submit-button"
+        onClick={handleSubmit}
+        disabled={!isFormValid || isSubmitting}
+      >
         {isSubmitting ? "Submitting..." : "Submit Comment"}
       </button>
     </div>
