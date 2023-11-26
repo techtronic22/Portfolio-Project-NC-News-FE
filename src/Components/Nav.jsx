@@ -17,7 +17,7 @@ const Nav = () => {
       </div>
       <ul className={`navbar ${isOpen ? "open" : ""}`}>
         <li>
-          <Link to="/home" onClick={toggleMenu}>
+          <Link to="/" onClick={toggleMenu}>
             Home
           </Link>
         </li>
